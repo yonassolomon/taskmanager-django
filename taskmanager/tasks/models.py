@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.db.models import CASCADE
 
 class Task(models.Model):
     PRIORITY_CHOICES=[
@@ -10,7 +12,7 @@ class Task(models.Model):
     title=models.CharField(max_length=200)
     description=models.TextField(blank=True)
     created_date=models.DateTimeField(auto_now_add=True)
-    due_date=models.DateTimeField(null=True,blanck=True ) #blank=True = Forms can be submitted with this field empty
+    due_date=models.DateTimeField(null=True,blank=True ) #blank=True = Forms can be submitted with this field empty
     completed=models.BooleanField(default=False)
     priority=models.CharField(max_length=10,choices=PRIORITY_CHOICES,default='medium')
 

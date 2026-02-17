@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title|default:"Create Task" }}</title>
+</head>
+<body>
+    <h1>{% if title %}{{ title }}{% else %}Create New Task{% endif %}</h1>
+    
+    <form method="POST">
+        {% csrf_token %}
+        
+        {% for field in form %}
+        <div style="margin-bottom: 15px;">
+            <label for="{{ field.id_for_label }}">{{ field.label }}:</label><br>
+            {{ field }}
+            {% if field.errors %}
+            <div style="color: red;">{{ field.errors }}</div>
+            {% endif %}
+        </div>
+        {% endfor %}
+        
+        <button type="submit">Save</button>
+        <a href="{% url 'task_list' %}">Cancel</a>
+    </form>
+</body>
+</html>

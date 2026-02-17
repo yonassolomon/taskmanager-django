@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Tasks</title>
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+    .task {
+        background: #2e2a2adc;
+        color: #fff;
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+    }
+    .task h3 {
+        margin: 0;
+    }
+    .task p {
+        margin: 5px 0;
+    }
+</style>
+<body>
+    <h1>📋 My Tasks</h1>
+    
+    <a href="{% url 'task_create' %}">➕ New Task</a>
+    
+    {% if tasks %}
+        {% for task in tasks %}
+        <div class="task">
+            <h3>{{ task.title }}</h3>
+            <p>Priority: {{ task.get_priority_display }}</p>
+            <p>Due: {{ task.due_date|default:"No due date" }}</p>
+            <p>Status: {% if task.completed %}✅ Done{% else %}⏳ Pending{% endif %}</p>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>No tasks yet. Create your first task!</p>
+    {% endif %}
+</body>
+</html>
