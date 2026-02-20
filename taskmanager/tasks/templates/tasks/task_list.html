@@ -31,10 +31,11 @@
     {% if tasks %}
         {% for task in tasks %}
         <div class="task">
-            <h3>{{ task.title }}</h3>
+            <h3><a href="{% url 'task_detail' task.id %}">{{ task.title }}</a></h3>
             <p>Priority: {{ task.get_priority_display }}</p>
             <p>Due: {{ task.due_date|default:"No due date" }}</p>
             <p>Status: {% if task.completed %}✅ Done{% else %}⏳ Pending{% endif %}</p>
+            <a href="{% url 'task_detail' task.id %}">See detail</a>
         </div>
         {% endfor %}
     {% else %}

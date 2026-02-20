@@ -1,0 +1,20 @@
+<h1>{{task.title}}</h1>
+<p>
+    Priority:{{task.get_priority_display}}
+</p>
+<p>
+    Due:{{task.due_date|default:"NO due date"}}
+</p>
+<p>
+    Status:{%if task.complated%}✅ Done
+    {% else %}⏳ Pending
+    {% endif %}
+</p>
+<p>
+    {{task.description}}
+</p>
+<div>
+    <a href='{% url 'task_edit' task.id %}'>✏️ Edit</a>
+    <a href='{% url 'task_delete' task.id %}'>🗑️ Delete</a>
+    <a href='{% url 'task_list'%}'> ← Back </a>
+</div>
