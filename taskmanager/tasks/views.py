@@ -49,3 +49,13 @@ def task_delete(request, task_id):
         messages.success(request, '✅ Task deleted!')
         return redirect('task_list')
     return render(request, 'tasks/task_confirm_delete.html', {'task': task})
+
+@login_required
+def pending_task(request):
+    tasks = Task.objects.filter(user=request.user, completed=False)
+    return render(request, 'tasks/task_list.html', {'tasks': tasks, 'title': "My pending tasks"})
+
+@login_required
+def completed_task(request):
+    tasks = Task.objects.filter(user=request.user, completed=True)
+    return render(request, 'tasks/task_list.html', {'tasks': tasks, 'title': "My completed tasks"})

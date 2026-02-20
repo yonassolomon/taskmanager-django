@@ -22,6 +22,22 @@
     .task p {
         margin: 5px 0;
     }
+    .filters {
+        margin: 20px 0;
+        display: flex;
+        gap: 10px;
+        padding: 10px;
+    }
+    .filters a {
+        text-decoration: none;
+        color: #333;
+        padding: 5px 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    .filters a:hover {
+        background: #a58c8c;
+    }
 </style>
 <body>
     <h1>📋 My Tasks</h1>
@@ -29,9 +45,15 @@
     <a href="{% url 'task_create' %}">➕ New Task</a>
     
     {% if tasks %}
+      <div class="filters">
+         
+        <a href='{% url 'pending_task' %}'>pending tasks</a>
+        <a href='{% url 'completed_task' %}'>completed tasks</a>
+         <a href='{% url 'task_list' %}'>all tasks</a>
+       </div>  
         {% for task in tasks %}
         <div class="task">
-            <h3><a href="{% url 'task_detail' task.id %}">{{ task.title }}</a></h3>
+            <h3>{{ task.title }}</h3>
             <p>Priority: {{ task.get_priority_display }}</p>
             <p>Due: {{ task.due_date|default:"No due date" }}</p>
             <p>Status: {% if task.completed %}✅ Done{% else %}⏳ Pending{% endif %}</p>
@@ -40,6 +62,9 @@
         {% endfor %}
     {% else %}
         <p>No tasks yet. Create your first task!</p>
+    {% endif %}
+    {% if tasks%}
+      <p>Total tasks: {{ tasks|length }}</p>
     {% endif %}
 </body>
 </html>
