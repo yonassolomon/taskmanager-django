@@ -38,8 +38,9 @@
     .filters a:hover {
         background: #a58c8c;
     }
-</style>
+    </style>
 <body>
+    
     <h1>📋 My Tasks</h1>
     
     <a href="{% url 'task_create' %}">➕ New Task</a>
@@ -50,6 +51,7 @@
         <a href='{% url 'pending_task' %}'>pending tasks</a>
         <a href='{% url 'completed_task' %}'>completed tasks</a>
          <a href='{% url 'task_list' %}'>all tasks</a>
+         <a href='{% url 'logout' %}'>logout</a>
        </div>  
         {% for task in tasks %}
         <div class="task">
@@ -62,6 +64,7 @@
         {% endfor %}
     {% else %}
         <p>No tasks yet. Create your first task!</p>
+        <a href='{% url 'logout'%}'>Logout</a>
     {% endif %}
     {% if tasks%}
       <p>Total tasks: {{ tasks|length }}</p>
